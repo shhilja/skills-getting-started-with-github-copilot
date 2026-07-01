@@ -32,8 +32,14 @@ def reset_activities():
     yield
     
     # Restore original state
-    for name, activity in activities.items():
-        activity["participants"] = original_activities[name]["participants"].copy()
+    activities.clear()
+    for name, original in original_activities.items():
+        activities[name] = {
+            "description": original["description"],
+            "schedule": original["schedule"],
+            "max_participants": original["max_participants"],
+            "participants": original["participants"].copy(),
+        }
 
 
 class TestGetActivities:
